@@ -1,7 +1,27 @@
+import styles from "./Header.module.scss";
+import cookchef from "../assets/images/cook-chef-logo.jpg";
+
+ 
+
 function Header() {
-    return <h1 className="flex-fill b3">Header</h1>;
-  }
-  
-   
-  
-  export default Header;
+  return (
+<header className={`${styles.header} d-flex flex-row align-items-center`}>
+<i className="fa-regular fa-bars mr-15"></i>
+
+<div className="flex-fill">
+<img src={cookchef} alt="logo cookchef" />
+</div>
+<ul>
+<button className="mr-5 btn btn-reverse-primary">
+<i className="fa-solid fa-basket-shopping mr-5"></i>
+<span>panier</span>
+</button>
+<button className="btn btn-primary">connexion</button>
+</ul>
+</header>
+  );
+}
+
+ 
+
+export default Header;
