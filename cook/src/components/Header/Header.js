@@ -1,5 +1,5 @@
 import styles from "./Header.module.scss";
-import cookchef from "../assets/images/cook-chef-logo.jpg";
+import cookchef from "../../assets/images/cook-chef-logo.jpg";
 
  
 
