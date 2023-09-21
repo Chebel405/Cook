@@ -12,9 +12,17 @@
     width: 1130px;
   }
   
-   
-  
-  .elem {
-    height: 200px;
-    border: 1px solid red;
+  .searchBar{
+    padding: 10px 15px;
+    border:1px solid var(--gray-2);
+    border-radius: 20px;
+    input{
+      outline:0;
+      border:0;
+    }
   }
+  
+  // .elem {
+  //   height: 200px;
+  //   border: 1px solid red;
+  // }
