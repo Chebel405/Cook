@@ -1,4 +1,4 @@
-import { data } from "../data/recipes";
+import { data } from "./recipes";
 
 export async function seedRecipes(){
     await fetch('https://restapi.fr/api/recipes', {

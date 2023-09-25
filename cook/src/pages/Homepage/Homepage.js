@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import styles from './Homepage.module.scss';
 import Recipe from './components/Recipe/Recipe';
-import { data } from '../../data/recipes';
+//import { data } from '../../data/recipes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import Loading from '../../components/Loading/Loading';
 
 
 
@@ -36,7 +37,7 @@ function Homepage() {
                 <input onInput={ handleInput } className='flex-fill'type='text'placeholder='Recherche' />
               </div>
               { isLoading ? (
-              <FontAwesomeIcon icon={faSpinner} />) : (
+                <Loading/> ) : (
               <div className={styles.grid}>
                 {recipes
                 .filter( r => r.title.toLowerCase().startsWith(filter))
