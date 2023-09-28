@@ -1,19 +1,35 @@
-import { useState } from 'react';
 import styles from './Recipe.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-//continuer ici
+import { useContext } from 'react';
+import { ApiContext } from '../../../../context/ApiContext';
 
- 
 
-function Recipe({ title, image }) {
-  const [liked, setLiked] = useState(false);
+// Décomposer l'objet recipe pour récupérer les informations
 
- 
+function Recipe({  recipe: { _id, liked, title, image}, toggleLikedRecipe}) {
+  const BASE_URL_API = useContext(ApiContext);
 
-  function handleClick() {
-    setLiked(!liked);
+  // faire une requête à un serveur donc "async"
+  async function handleClick() {
+    try{
+      const response = await fetch(`${BASE_URL_API}/${ _id }`,{
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          liked: !liked
+        })
+      });
+      if(response.ok) {
+        const uptatedRecipe = await response.json();
+        toggleLikedRecipe(uptatedRecipe);
+      }
+    } catch(e) {
+      console.log("ERREUR");
+
+    }
   }
 
  

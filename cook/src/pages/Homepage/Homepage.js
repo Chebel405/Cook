@@ -3,7 +3,7 @@ import styles from './Homepage.module.scss';
 import Recipe from './components/Recipe/Recipe';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+//import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Loading from '../../components/Loading/Loading';
 import { ApiContext } from "../../context/ApiContext";
 
@@ -38,6 +38,13 @@ function Homepage() {
     return () => (cancel = true);
   }, [BASE_URL_API]);
 
+  // Recupere le recipe
+  function updateRecipe(uptatedRecipe) {
+    setRecipes(
+      recipes.map((r) => (r._id === uptatedRecipe._id ? uptatedRecipe : r ))
+    );
+  }
+
   /**
    * Fonction permettant de filtrer les recherches de l'utilisateur
    * @param {*} e récupere l'evenement, la valeur de l'input
@@ -64,7 +71,7 @@ function Homepage() {
                 {recipes
                 .filter( r => r.title.toLowerCase().startsWith(filter))
                 .map((r) => (
-                  <Recipe key={r._id} title={r.title} image={r.image} />
+                  <Recipe key={r._id} recipe={ r } toggleLikedRecipe={updateRecipe}/>
                 ))}
               </div> 
               )}
