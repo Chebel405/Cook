@@ -10,9 +10,9 @@ import styles from './App.module.scss';
 function App() {
   return (
 <div className={`d-flex flex-column ${styles.appContainer}`}>
-<Header />
-<Homepage />
-<Footer />
+  <Header />
+  <Homepage />
+  <Footer />
 </div>
   );
 }
