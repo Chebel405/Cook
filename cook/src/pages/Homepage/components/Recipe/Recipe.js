@@ -3,15 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useContext } from 'react';
 import { ApiContext } from '../../../../context/ApiContext';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
+
 
 
 // Décomposer l'objet recipe pour récupérer les informations
 
-function Recipe({  recipe: { _id, liked, title, image}, toggleLikedRecipe}) {
+function Recipe({  recipe: { _id, liked, title, image}, toggleLikedRecipe, deleteRecipe}) {
   const BASE_URL_API = useContext(ApiContext);
 
   // faire une requête à un serveur donc "async"
-  async function handleClick() {
+  async function handleClickLike() {
     try{
       const response = await fetch(`${BASE_URL_API}/${ _id }`,{
         method: 'PATCH',
@@ -32,10 +35,22 @@ function Recipe({  recipe: { _id, liked, title, image}, toggleLikedRecipe}) {
     }
   }
 
- 
+  async function handleClickDelete(e){
+    e.stopPropagation();
+    try{
+      const response = await fetch(`${BASE_URL_API}/${ _id }`, { method: 'DELETE' });
+      if(response.ok){
+        deleteRecipe(_id);
+      }
+    }catch(e){
+      console.log("Erreur");
+    }
+
+  }
 
   return (
-    <div onClick={handleClick} className={styles.recipe}>
+    <div onClick={handleClickLike} className={styles.recipe}>
+      <FontAwesomeIcon onClick={ handleClickDelete } icon={faTimes} /> {/* Icône solide */}
       <div className={styles.imageContainer}>
         <img src={image} alt={title} />
       </div>

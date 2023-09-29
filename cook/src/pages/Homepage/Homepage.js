@@ -25,6 +25,10 @@ function Homepage() {
     );
   }
 
+  function deleteRecipe(_id){
+    setRecipes(recipes.filter((r) => r._id !== _id));
+  }
+
   return (
           <div className="flex-fill container d-flex flex-column p-20">
             <h1 className="my-30">Découvrez nos nouvelles recettes<small className={styles.small}>-{recipes.length}</small></h1>
@@ -36,7 +40,12 @@ function Homepage() {
                 {recipes
                 .filter( r => r.title.toLowerCase().startsWith(filter))
                 .map((r) => (
-                  <Recipe key={r._id} recipe={ r } toggleLikedRecipe={updateRecipe}/>
+                  <Recipe 
+                    key={r._id}
+                    recipe={ r }
+                    deleteRecipe={deleteRecipe}
+                    toggleLikedRecipe={updateRecipe}
+                  />
                 ))}
               </div> 
               )}
