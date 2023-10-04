@@ -16,8 +16,11 @@ export function useFetchData( url, page ){
             // 18 articles par page
             const queryParam = new URLSearchParams();
             if(page){
+                //Limiter l'affichage de 18 recettes par page
                 queryParam.append("limit", 18);
                 queryParam.append("skip", (page - 1) * 18);
+                //Ranger les recettes par ordre du plus récent aux plus anciens
+                queryParam.append('sort', 'createdAt:-1');
             } 
             const response = await fetch(url + `?${queryParam}`);
             if(response.ok && !cancel){
