@@ -35,8 +35,8 @@ function Recipe({  recipe: { _id, liked, title, image}, toggleLikedRecipe, delet
     }
   }
 
-  async function handleClickDelete(e){
-    e.stopPropagation();
+  async function handleClickDelete(e){ 
+    e.stopPropagation();// Ne pas déclencher la méthode toggle
     try{
       const response = await fetch(`${BASE_URL_API}/${ _id }`, { method: 'DELETE' });
       if(response.ok){

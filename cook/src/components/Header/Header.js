@@ -8,7 +8,7 @@ import HeaderMenu from "./components/HeaderMenu/HeaderMenu";
 
  
 
-function Header() {
+function Header({ setPage }) {
 
   const [showMenu, setShowMenu] = useState(false);
 
@@ -16,10 +16,17 @@ function Header() {
     <header className={`${styles.header} d-flex flex-row align-items-center`}>
       {/* <i className="fa-regular fa-bars mr-15"></i> */}
       <div className="flex-fill">
-        <img src={cookchef} alt="logo cookchef" />
+        <img 
+          onClick={ () => setPage("homepage")}
+          src={cookchef} 
+          alt="logo cookchef" 
+        />
       </div>
       <ul className={styles.headerList}>
-        <button className="mr-5 btn btn-reverse-primary">
+        <button onClick={() => setPage("admin")} className="btn btn-primary mr-15">
+          Ajouter une recette
+        </button>
+        <button className="mr-15 btn btn-reverse-primary">
           <FontAwesomeIcon icon={faHeart} />
           <span>panier</span>
         </button>
@@ -31,7 +38,7 @@ function Header() {
         {showMenu && (
           <>
             <div onClick={() => setShowMenu(false)} className="calc"></div>
-            <HeaderMenu />
+            <HeaderMenu setPage={setPage} />
           </>
         )}
     </header>
